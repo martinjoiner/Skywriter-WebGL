@@ -1,0 +1,5 @@
+
+# Ignore the sensitive authorisation data in config.js
+config.js
+
+node_modules
