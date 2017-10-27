@@ -89,19 +89,9 @@ function render() {
   scene.add(camera);
 
 
-  // Directional lights scattered throughout the scene
-  var lights = [];
-  lights[0] = new THREE.DirectionalLight( 0xff8888, 1 ); 
-  lights[0].name = "Left Red Light";
-  lights[0].position.set( 50, 160, 20);
-
-  lights[1] = new THREE.DirectionalLight( 0x0088ff, 1 ); 
-  lights[1].name = "Right Blue Light";
-  lights[1].position.set( 800, 160, 20);
-
-  for( var i = 0; i < lights.length; i++ ){
-    scene.add( lights[i] );
-  }
+  // LIGHTS
+  scene.add( new THREE.DirectionalLight( 0xFFFFFF, 0.5 ) );
+  scene.add( new THREE.AmbientLight( 0xFFFFFF, 0.5 ) );
 
 
 

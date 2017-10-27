@@ -60,7 +60,7 @@ var SmokeBubble = function( parent, x, y, z ){
 
   // Define geometry and material for visualising the cuboid thing that'll travel along the line
   var geometry = new THREE.SphereGeometry( 8, 30 );
-  var material = new THREE.MeshLambertMaterial( { color: 0xAAAAAA, transparent: true, opacity: 0.5 } );
+  var material = new THREE.MeshLambertMaterial( { color: 0xEEEEEE } );
 
   this.mesh = new THREE.Mesh(geometry, material);
   this.mesh.name = "Smoke Bubble";
