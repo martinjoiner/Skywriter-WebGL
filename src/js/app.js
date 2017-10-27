@@ -104,7 +104,63 @@ function render() {
   }
 
 
-  //controls = new THREE.TrackballControls(camera, render.domElement);
+
+
+  // TGA texture cube map -------------------------------------------------
+  // Following code is a rehash of CubeTextureLoader but made to work with TGA files
+  // https://github.com/mrdoob/three.js/blob/master/src/loaders/CubeTextureLoader.js
+  // I could repackage it as a module and submit pull request to ThreeJS
+
+  var path = "ame_desert/desertsky_";
+  var format = '.tga';
+  var urls = [
+      path + 'ft' + format, path + 'bk' + format,
+      path + 'up' + format, path + 'dn' + format, 
+      path + 'rt' + format, path + 'lf' + format
+    ];
+
+  var texture = new THREE.CubeTexture();
+
+  var loader = new THREE.TGALoader();
+  //loader.setCrossOrigin( this.crossOrigin );
+  //loader.setPath( this.path );
+
+  var loaded = 0;
+
+  function loadTexture( i ) {
+
+    loader.load( urls[ i ], function ( image ) {
+
+      texture.images[ i ] = image.image;
+
+      loaded ++;
+
+      if ( loaded === 6 ) {
+
+        texture.needsUpdate = true;
+
+      }
+
+    }, function(){
+      // console.log("loaded!");
+    } );
+
+  }
+
+  for ( var i = 0; i < urls.length; ++ i ) {
+    loadTexture( i );
+  }
+
+  scene.background = texture;
+
+  // END TGA SKYMAP ----------------------------------------------------------
+
+
+
+
+  // Controls
+  controls = new THREE.OrbitControls( camera, renderer.domElement );
+  controls.addEventListener( 'change', render );
 
   // Define geometry for visualising the spline
   var geometry = getWordGeometry( 'cab' );

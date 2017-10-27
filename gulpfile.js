@@ -10,10 +10,11 @@ gulp.task('build_vendor_bundle', function(){
   return gulp.src([
       './src/js/vendor/three-r87.min.js', 
       './src/js/vendor/OrbitControls.js', 
+      './src/js/vendor/TGALoader.js', 
       './src/js/vendor/microajax-strict.js'
     ])
     .pipe( concat('vendor_bundle.min.js') )
-    //.pipe( uglify() )
+    .pipe( uglify() )
     .pipe( gulp.dest('./public/js') );
 
 });
