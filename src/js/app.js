@@ -162,8 +162,7 @@ function render() {
 
   // Visualise the spline on the scene
   var line = new THREE.Line(geometry, material);
-  line.name = 'Word';
-  scene.add(line);
+  //scene.add(line); // <-- Uncomment to show the path
 
   plane = new Plane();
 
