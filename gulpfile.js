@@ -9,7 +9,8 @@ var scripts = {
       './src/js/vendor/three-r87.min.js', 
       './src/js/vendor/OrbitControls.js', 
       './src/js/vendor/TGALoader.js', 
-      './src/js/vendor/microajax-strict.js'
+      './src/js/vendor/microajax-strict.js',
+      './src/js/vendor/noise.js'
   ],
   app: [
       './src/js/splineFactory.js',
@@ -17,7 +18,8 @@ var scripts = {
       './src/js/plane.js',
       './src/js/words.js',
       './src/js/sounds.js',
-      './src/js/app.js'
+      './src/js/app.js',
+      './src/js/keys.js'
     ]
 };
 
