@@ -4,6 +4,10 @@ Single page WebGL interface for an interactive skywriter plane. The plane will f
 
 The eventual goal is for it to continually fly, writing a never-ending stream of live Tweets.
 
+## Controls
+
+Press the 's' key to toggle the smoke trail on and off.
+
 ## Installation
 
 Clone down the repo to your machine and point the browser to `/public/index.html`. The whole page is static HTML and JavaScript.
