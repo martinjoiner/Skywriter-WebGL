@@ -25,20 +25,20 @@ var Plane = function(){
     scene.add(box);
 
     // The fuselage 
-    var fuselage_geometry = new THREE.BoxGeometry(3, 8, 3);
+    var fuselage_geometry = new THREE.BoxGeometry(3, 3, 8);
     var fuselage = new THREE.Mesh(fuselage_geometry, material);
     box.add(fuselage);
 
     // Cockpit 
-    var fuselage_geometry = new THREE.BoxGeometry(3, 4, 3);
+    var fuselage_geometry = new THREE.BoxGeometry(2.5, 2.5, 4);
     var fuselage = new THREE.Mesh(fuselage_geometry, material);
-    fuselage.translateZ(1.5);
+    fuselage.translateY(1.5);
     box.add(fuselage);
 
     // Wing
-    var wing_geometry = new THREE.BoxGeometry(20, 4, 0.5);
+    var wing_geometry = new THREE.BoxGeometry(22, 0.4, 4);
     var wing = new THREE.Mesh(wing_geometry, material);
-    wing.translateZ(3);
+    wing.translateY(3);
     box.add(wing);
 
     // Tail
@@ -55,8 +55,7 @@ var Plane = function(){
     }
     var tail_geometry = new THREE.ExtrudeGeometry(tail_shape, extrudeSettings);
     var tail = new THREE.Mesh(tail_geometry, material);
-    tail.rotateY( Math.PI / 2);
-    tail.rotateZ( Math.PI / 2);
+    tail.rotateY( Math.PI / -2);
     tail.translateX( -12);
     tail.translateZ( -1.5);
     box.add(tail);
@@ -64,22 +63,30 @@ var Plane = function(){
     // Tail fin
     var tailFin_geometry = new THREE.BoxGeometry(0.4, 3, 3);
     var tailFin = new THREE.Mesh(tailFin_geometry, material);
-    tailFin.translateY(-11);
-    tailFin.translateZ(3.2);
+    tailFin.translateY(4);
+    tailFin.translateZ(-11);
     box.add(tailFin);
 
-    // Nose cone
-    var nose_geometry = new THREE.CylinderGeometry( 1.2, 1.8, 2.6, 20 );
+    // Nose 
+    var nose_shape = new THREE.Shape();
+    nose_shape.moveTo(0, 0);
+    nose_shape.lineTo(0, 1.5);
+    nose_shape.lineTo(3, 2);
+    nose_shape.lineTo(3, -1.1);
+    nose_shape.lineTo(0, 0);
+    var nose_geometry = new THREE.ExtrudeGeometry(nose_shape, extrudeSettings);
     var nose = new THREE.Mesh(nose_geometry, material);
-    nose.position.set( 0, 5.2, 0);
+    nose.rotateY( Math.PI / 2);
+    nose.position.set( -1.5, -0.5, 6.4);
     box.add( nose );
 
     // Propeller
-    var propeller_geometry = new THREE.CylinderGeometry( 3, 3, 0.2, 20 );
+    var propeller_geometry = new THREE.CylinderGeometry( 2.6, 2.6, 0.2, 20 );
     var propeller_material = new THREE.MeshLambertMaterial( { color: 0xFFFFFF, transparent: true, opacity: 0.5 } );
-    var scoutBox = new THREE.Mesh(propeller_geometry, propeller_material);
-    scoutBox.position.set( 0, 7.2, 0);
-    box.add( scoutBox );
+    var propeller = new THREE.Mesh(propeller_geometry, propeller_material);
+    propeller.position.set( 0, 0, 7);
+    propeller.rotateX( Math.PI / -2);
+    box.add( propeller );
 
     function setPosition(point) {
         box.position.copy(point);
@@ -90,8 +97,8 @@ var Plane = function(){
 
     function setTangent(tangent) {
 
-        axis.crossVectors(up, tangent).normalize();
-        var radians = Math.acos(up.dot(tangent));
+        axis.crossVectors(forward, tangent).normalize();
+        var radians = Math.acos(forward.dot(tangent));
 
         // Pitch where:
         // -0.5 is flying directly upwards

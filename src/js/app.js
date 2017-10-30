@@ -17,6 +17,7 @@ var controls,
     tangent = new THREE.Vector3(),
     axis = new THREE.Vector3(),
     up = new THREE.Vector3( 0, 1, 0),
+    forward = new THREE.Vector3( 0, 0, 1),
 
     audioCtx = new AudioContext();
 
@@ -83,7 +84,7 @@ function render() {
     scene.name = 'Skywriter';
 
     // Add a camera 
-    camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 1, 5000);
+    camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 5000);
     camera.name = "Only Camera";
     camera.position.set(120, 120, 390);
     camera.lookAt(new THREE.Vector3(125, 140, 0));
