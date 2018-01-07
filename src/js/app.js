@@ -14,8 +14,6 @@ var controls,
     // Counter is a percentage as a decimal in range 0.0 - 1.0
     counter = 0,
 
-    tangent = new THREE.Vector3(),
-    axis = new THREE.Vector3(),
     up = new THREE.Vector3( 0, 1, 0),
     forward = new THREE.Vector3( 0, 0, 1),
 
@@ -23,8 +21,12 @@ var controls,
 
 
 
+
 function movePlane() {
-    movePlaneAlongSpline();
+    if (pilot.isInHumanMode()) {
+        return movePlaneNatural();
+    }
+    return movePlaneAlongSpline();
 }
 
 
@@ -58,7 +60,14 @@ function movePlaneAlongSpline() {
     tangent = spline.getTangentAt(counter).normalize();
 
     plane.setTangent(tangent);
-}          
+}
+
+/**
+ * 
+ */
+function movePlaneNatural() {
+    // TODO: Move the plane "forward" in relation to where it's pointing
+}     
 
 
 
@@ -174,5 +183,4 @@ function render() {
     // Set the movePlane() function to fire every x miliseconds
     setInterval(movePlane, 50);
     
-
 })();

@@ -11,6 +11,14 @@ var Plane = function(){
     /** {boolean} Indicates if the smoker is operational */
     var smoking = false;
 
+    // The direction of the plane
+    var tangent = new THREE.Vector3(1, 1, 0);
+
+    // 
+    var axis = new THREE.Vector3();
+
+    
+
     // Audio
     var smokeNoise = audioCtx.createBrownNoise();
     var gainNode = audioCtx.createGain();
@@ -95,9 +103,12 @@ var Plane = function(){
         }
     }
 
-    function setTangent(tangent) {
+    function setTangent(newTangent) {
+
+        tangent = newTangent;
 
         axis.crossVectors(forward, tangent).normalize();
+        
         var radians = Math.acos(forward.dot(tangent));
 
         // Pitch where:
@@ -123,11 +134,26 @@ var Plane = function(){
     function startSmoke() {
         gainNode.gain.value = 0.02;
         return smoking = true;
-    }
+    } 
 
     function stopSmoke() {
         gainNode.gain.value = 0;
         return smoking = false;
+    }
+
+    /**
+     * @param {float} amount - How much to increase pitch by in Radians
+     */
+    function pitchAdjust(amount) {
+        // TODO: Make the nose of the plane pitch up or down based on amount param
+    }
+
+    function pitchUp() {
+        pitchAdjust(0.05);
+    }
+
+    function pitchDown() {
+        pitchAdjust(-0.05);
     }
 
     return {
@@ -138,6 +164,8 @@ var Plane = function(){
         setTangent: setTangent,
         toggleSmoke: toggleSmoke,
         startSmoke: startSmoke,
-        stopSmoke: stopSmoke
+        stopSmoke: stopSmoke,
+        pitchUp: pitchUp,
+        pitchDown: pitchDown
     }
 };

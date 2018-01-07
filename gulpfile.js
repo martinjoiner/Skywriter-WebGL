@@ -19,6 +19,7 @@ var scripts = {
       './src/js/words.js',
       './src/js/sounds.js',
       './src/js/app.js',
+      './src/js/pilot.js',
       './src/js/keys.js'
     ]
 };
